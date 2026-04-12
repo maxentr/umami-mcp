@@ -4,9 +4,10 @@ import { resolveConfig } from "./config";
 import { UmamiClient } from "./client/umami";
 import { buildTools } from "./tools";
 import type { ToolContext } from "./tools/_helpers";
+import pkg from "../package.json";
 
-const PKG_NAME = "@climactic/umami-mcp";
-const PKG_VERSION = "0.1.0";
+const PKG_NAME = pkg.name;
+const PKG_VERSION = pkg.version;
 
 export function createServer(env: Record<string, string | undefined> = process.env) {
   const cfg = resolveConfig(env);

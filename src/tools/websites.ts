@@ -19,8 +19,8 @@ export const websiteTools: ToolModule = (ctx) => {
         ...paginationShape,
         includeTeams: z
           .boolean()
-          .optional()
-          .describe("Include team-owned websites in the result."),
+          .default(true)
+          .describe("Include team-owned websites in the result. Defaults to true."),
       },
       handler: async (args) => {
         const data = await ctx.client.request<{ data?: unknown[] }>(

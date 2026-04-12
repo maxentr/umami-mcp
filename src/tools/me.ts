@@ -17,7 +17,7 @@ export const meTools: ToolModule = (ctx) => {
       name: "umami_list_my_websites",
       description: "List websites accessible to the current user.",
       inputSchema: {
-        includeTeams: z.boolean().optional(),
+        includeTeams: z.boolean().default(true).describe("Include team-owned websites. Defaults to true."),
       },
       handler: async (args) => {
         const data = await ctx.client.request<{ data?: unknown[] }>(
