@@ -86,12 +86,19 @@ export class UmamiClient {
     this.opts = opts;
   }
 
+  private resolvePath(path: string): string {
+    if (this.opts.mode === "self-hosted" && !path.startsWith("/api/")) {
+      return `/api${path.startsWith("/") ? "" : "/"}${path}`;
+    }
+    return path;
+  }
+
   async request<T = unknown>(
     method: string,
     path: string,
     opts: RequestOpts = {},
   ): Promise<T> {
-    return this.doRequest<T>(method, path, opts, false);
+    return this.doRequest<T>(method, this.resolvePath(path), opts, false);
   }
 
   private async doRequest<T>(

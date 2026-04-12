@@ -158,7 +158,7 @@ describe("UmamiClient (self-hosted mode, auth)", () => {
       password: "hunter2",
     });
 
-    await client.request("GET", "/api/websites");
+    await client.request("GET", "/websites");
 
     expect(stub.calls).toHaveLength(2);
     expect(stub.calls[0]!.url).toBe("https://umami.example.com/api/auth/login");
@@ -166,6 +166,7 @@ describe("UmamiClient (self-hosted mode, auth)", () => {
     expect(stub.calls[0]!.init?.body).toBe(
       JSON.stringify({ username: "admin", password: "hunter2" }),
     );
+    // resolvePath() auto-prepends /api for self-hosted
     expect(stub.calls[1]!.url).toBe("https://umami.example.com/api/websites");
     const headers = new Headers(stub.calls[1]!.init?.headers);
     expect(headers.get("authorization")).toBe("Bearer abc.jwt.token");
@@ -186,9 +187,9 @@ describe("UmamiClient (self-hosted mode, auth)", () => {
       password: "b",
     });
 
-    await client.request("GET", "/api/websites");
-    await client.request("GET", "/api/me");
-    await client.request("GET", "/api/teams");
+    await client.request("GET", "/websites");
+    await client.request("GET", "/me");
+    await client.request("GET", "/teams");
 
     const logins = stub.calls.filter((c) => c.url.endsWith("/api/auth/login"));
     expect(logins).toHaveLength(1);
@@ -217,7 +218,7 @@ describe("UmamiClient (self-hosted mode, auth)", () => {
       password: "b",
     });
 
-    const result = await client.request<{ data: string }>("GET", "/api/websites");
+    const result = await client.request<{ data: string }>("GET", "/websites");
     expect(result).toEqual({ data: "ok" });
     expect(loginCount).toBe(2);
 
@@ -243,7 +244,7 @@ describe("UmamiClient (self-hosted mode, auth)", () => {
 
     let err: unknown;
     try {
-      await client.request("GET", "/api/websites");
+      await client.request("GET", "/websites");
     } catch (e) {
       err = e;
     }
