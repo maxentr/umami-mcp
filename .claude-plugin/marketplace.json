@@ -4,7 +4,7 @@
   "plugins": [
     {
       "name": "umami-mcp",
-      "source": ".",
+      "source": "./",
       "description": "MCP server for Umami Analytics (cloud + self-hosted)."
     }
   ]

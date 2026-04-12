@@ -1,6 +1,6 @@
 {
   "name": "@climactic/umami-mcp",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "MCP server for Umami Analytics — query stats, pageviews, metrics, sessions, events, and reports against Umami Cloud or self-hosted.",
   "module": "index.ts",
   "type": "module",
