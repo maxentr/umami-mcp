@@ -1,0 +1,52 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: bun install --frozen-lockfile
+      - run: bun test
+      - run: bunx tsc --noEmit
+      - run: bunx oxlint
+
+  publish:
+    needs: test
+    runs-on: ubuntu-latest
+    environment: npm
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - run: bun install --frozen-lockfile
+
+      - name: Sync version from release tag
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          bun -e "
+            const pkg = await Bun.file('package.json').json();
+            pkg.version = '${VERSION}';
+            await Bun.write('package.json', JSON.stringify(pkg, null, 2) + '\n');
+          "
+          echo "Publishing version ${VERSION}"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+
+      - run: npm publish --access public

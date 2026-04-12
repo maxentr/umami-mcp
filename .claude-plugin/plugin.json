@@ -1,0 +1,10 @@
+{
+  "name": "umami-mcp",
+  "description": "MCP server for Umami Analytics — query stats, pageviews, metrics, sessions, events, and reports against Umami Cloud or self-hosted.",
+  "version": "0.1.0",
+  "author": { "name": "Aditya Tripathi" },
+  "homepage": "https://github.com/climactic/umami-mcp",
+  "repository": "https://github.com/climactic/umami-mcp",
+  "license": "MIT",
+  "keywords": ["umami", "analytics", "mcp"]
+}

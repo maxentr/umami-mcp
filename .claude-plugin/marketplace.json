@@ -1,0 +1,11 @@
+{
+  "name": "climactic",
+  "owner": { "name": "Climactic" },
+  "plugins": [
+    {
+      "name": "umami-mcp",
+      "source": ".",
+      "description": "MCP server for Umami Analytics (cloud + self-hosted)."
+    }
+  ]
+}

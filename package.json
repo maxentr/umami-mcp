@@ -1,0 +1,59 @@
+{
+  "name": "@climactic/umami-mcp",
+  "version": "0.1.0",
+  "description": "MCP server for Umami Analytics — query stats, pageviews, metrics, sessions, events, and reports against Umami Cloud or self-hosted.",
+  "module": "index.ts",
+  "type": "module",
+  "bin": {
+    "umami-mcp": "bin.js"
+  },
+  "files": [
+    "index.ts",
+    "bin.js",
+    "src",
+    "skills",
+    ".claude-plugin",
+    ".mcp.json",
+    "README.md"
+  ],
+  "keywords": [
+    "mcp",
+    "umami",
+    "analytics",
+    "claude",
+    "model-context-protocol"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/climactic/umami-mcp.git"
+  },
+  "license": "MIT",
+  "funding": [
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/climactic"
+    },
+    {
+      "type": "ko-fi",
+      "url": "https://ko-fi.com/climacticco"
+    }
+  ],
+  "scripts": {
+    "start": "bun run index.ts",
+    "test": "bun test",
+    "lint": "bunx oxlint",
+    "fmt": "bunx oxfmt"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "oxfmt": "^0.1.0",
+    "oxlint": "^1.28.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^4.3.6"
+  }
+}
