@@ -1,2 +1,3 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Normalize to LF in the working tree as well as in the repo. Without eol=lf a
+# global core.autocrlf=true checks files out with CRLF, which oxfmt rejects.
+* text=auto eol=lf
