@@ -1,25 +1,20 @@
-import type { ToolContext, ToolDef } from "./_helpers";
-import { websiteTools } from "./websites";
-import { meTools } from "./me";
-import { statsTools } from "./stats";
-import { sessionTools } from "./sessions";
-import { eventTools } from "./events";
-import { reportTools } from "./reports";
-import { teamTools } from "./teams";
-import { userTools } from "./users";
+import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
+import type { ApiClient } from "../api-client.js"
+import type { Config } from "../config.js"
+import * as getUmamiMetrics from "./get-umami-metrics.js"
+import * as getUmamiStats from "./get-umami-stats.js"
+import * as listUmamiWebsites from "./list-umami-websites.js"
+import * as runUmamiReport from "./run-umami-report.js"
+import * as sendUmamiEvent from "./send-umami-event.js"
+import * as umamiApi from "./umami-api.js"
+import * as umamiCatalog from "./umami-catalog.js"
 
-export function buildTools(ctx: ToolContext): ToolDef[] {
-  const base: ToolDef[] = [
-    ...meTools(ctx),
-    ...websiteTools(ctx),
-    ...statsTools(ctx),
-    ...sessionTools(ctx),
-    ...eventTools(ctx),
-    ...reportTools(ctx),
-    ...teamTools(ctx),
-  ];
-  if (ctx.mode === "self-hosted") {
-    base.push(...userTools(ctx));
-  }
-  return base;
+export function registerAllTools(server: McpServer, api: ApiClient, config: Config) {
+  umamiCatalog.register(server)
+  umamiApi.register(server, api, config)
+  listUmamiWebsites.register(server, api, config)
+  getUmamiStats.register(server, api, config)
+  getUmamiMetrics.register(server, api, config)
+  runUmamiReport.register(server, api, config)
+  sendUmamiEvent.register(server, api, config)
 }

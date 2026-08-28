@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "umami": {
+      "command": "npx",
+      "args": ["-y", "@maxentr/umami-mcp"],
+      "env": {
+        "UMAMI_BASE_URL": "https://umami.example.com",
+        "UMAMI_USERNAME": "your-user",
+        "UMAMI_PASSWORD": "your-password",
+        "UMAMI_DEFAULT_WEBSITE_ID": "",
+        "UMAMI_ALLOW_WRITES": "false"
+      }
+    }
+  }
+}
