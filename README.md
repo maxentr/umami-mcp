@@ -107,6 +107,23 @@ pnpm run smoke     # boots the built server over stdio and asserts its contract
 pnpm run inspector # MCP inspector against build/index.js
 ```
 
+## Releasing
+
+```bash
+# 1. add the entry under a new heading in CHANGELOG.md, and its compare link
+# 2. bump, commit and tag in one step
+npm version patch   # or minor / major
+
+# 3. publish (prepublishOnly runs check + build + smoke first)
+npm publish --access public
+
+# 4. push the commit and its tag
+git push --follow-tags
+```
+
+Only `build/` is published (`files` in `package.json`). `prepublishOnly` gates the tarball on
+lint, format, typecheck and the smoke check, so a broken build cannot reach npm.
+
 ## Notes on Umami v3
 
 Umami v3 renamed several query values. The catalog and the tool schemas carry the current
@@ -117,6 +134,10 @@ spellings; the older ones return empty results rather than errors, which is easy
 - Report bodies are nested: `{websiteId, type, parameters: {...}, filters: {...}}`, not flat
 - Funnel and attribution step types are `path` / `event`
 - Attribution models are `first-click` / `last-click`
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md).
 
 ## Credits
 

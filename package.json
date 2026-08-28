@@ -30,6 +30,7 @@
   "scripts": {
     "build": "tsc",
     "prepare": "lefthook install || true && tsc",
+    "prepublishOnly": "pnpm run check && pnpm run build && pnpm run smoke",
     "watch": "tsc --watch",
     "inspector": "npx @modelcontextprotocol/inspector build/index.js",
     "check": "oxlint && oxfmt --check .",
